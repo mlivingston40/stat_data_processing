@@ -1,15 +1,15 @@
-#Module for taking raw bulk json from stat
+# Module for taking raw bulk json from stat
 
 ## CSV outputs are currently only working
 
-###I think the main issue was that these days wasn't typical and had strange characters that caused things to failed. 
+### I think the main issue was that these days wasn't typical and had strange characters that caused things to failed. 
 
 ### Meaning, the json has to be read in to escape characters e.g. strict=False'
 ```python
 data2 = json.loads(data.decode('utf-8'), strict=False) 
 ```
 
-##All dependencies are located in the venv
+## All dependencies are located in the venv
 ### To Run Script:
 ```bash
 ~$ source venv/bin activate
@@ -17,7 +17,7 @@ data2 = json.loads(data.decode('utf-8'), strict=False)
 ```
 
 ## Parquet file writes currently failing and will continue investigating, but think its:
-###When the dataframe has an array for the 'ResultType' e.g sometimes it shows up as ['answers', 'list']
+### When the dataframe has an array for the 'ResultType' e.g sometimes it shows up as ['answers', 'list']
 
 ```bash
 (venv) it-mbp-mattlivingston:stat_data_processing mattlivingston$ python test.py
