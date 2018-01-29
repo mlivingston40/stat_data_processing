@@ -1,0 +1,14 @@
+Files to Read in FROM: rentpathdatalake
+
+ /PROD/API-STAT/INPUT/{YYYMMDD}/Bulk/JSON/serps{YYYYMMDD}.json
+
+ ### The following dates are missing the raw bulk JSON ###
+20170903,
+20170907,
+20170909,
+20170910,
+20170912,
+20170914,
+20170916,
+20170930,
+20171019

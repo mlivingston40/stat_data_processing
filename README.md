@@ -10,36 +10,20 @@ data2 = json.loads(data.decode('utf-8'), strict=False)
 ```
 
 ## All dependencies are located in the venv
-### To Run Script:
+### To Run Script to take raw json to csv and upload to: /PROD/API-STAT/Bulk/csv/{YYYYMMDD}/data{YYYYMMDD}.csv :
 ```bash
 ~$ source venv/bin activate
 (venv) ~$ python auto_loop.py
 ```
 
-## Parquet file writes currently failing and will continue investigating, but think its:
-### When the dataframe has an array for the 'ResultType' e.g sometimes it shows up as ['answers', 'list']
-
+### To Run Script to take converted csv files (in DataLake) to parquet and upload to: /PROD/API-STAT/Bulk/parquet/{YYYYMMDD}/data{YYYYMMDD}.parquet :
 ```bash
-(venv) it-mbp-mattlivingston:stat_data_processing mattlivingston$ python test.py
-Traceback (most recent call last):
-  File "test.py", line 47, in <module>
-    table = pa.Table.from_pandas(dataframe)
-  File "pyarrow/table.pxi", line 875, in pyarrow.lib.Table.from_pandas (/Users/travis/build/BryanCutler/arrow-dist/arrow/python/build/temp.macosx-10.6-intel-3.6/lib.cxx:44927)
-  File "/Users/mattlivingston/PycharmProjects/stat_data_processing/venv/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 356, in dataframe_to_arrays
-    convert_types))
-  File "/Users/mattlivingston/miniconda3/lib/python3.6/concurrent/futures/_base.py", line 586, in result_iterator
-    yield fs.pop().result()
-  File "/Users/mattlivingston/miniconda3/lib/python3.6/concurrent/futures/_base.py", line 425, in result
-    return self.__get_result()
-  File "/Users/mattlivingston/miniconda3/lib/python3.6/concurrent/futures/_base.py", line 384, in __get_result
-    raise self._exception
-  File "/Users/mattlivingston/miniconda3/lib/python3.6/concurrent/futures/thread.py", line 56, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "/Users/mattlivingston/PycharmProjects/stat_data_processing/venv/lib/python3.6/site-packages/pyarrow/pandas_compat.py", line 345, in convert_column
-    return pa.array(col, from_pandas=True, type=ty)
-  File "pyarrow/array.pxi", line 170, in pyarrow.lib.array (/Users/travis/build/BryanCutler/arrow-dist/arrow/python/build/temp.macosx-10.6-intel-3.6/lib.cxx:29224)
-  File "pyarrow/array.pxi", line 70, in pyarrow.lib._ndarray_to_array (/Users/travis/build/BryanCutler/arrow-dist/arrow/python/build/temp.macosx-10.6-intel-3.6/lib.cxx:28465)
-  File "pyarrow/error.pxi", line 87, in pyarrow.lib.check_status (/Users/travis/build/BryanCutler/arrow-dist/arrow/python/build/temp.macosx-10.6-intel-3.6/lib.cxx:8645)
-pyarrow.lib.ArrowTypeError: Unsupported Python type for list items
-(venv) it-mbp-mattlivingston:stat_data_processing mattlivingston$ 
+~$ source venv/bin activate
+(venv) ~$ python read_csv_adl_to_parquet.py
 ```
+
+## Future possible work:
+
+### Combine 'auto_loop.py' and 'read_csv_adl_to_parquet.py' to run in one job
+
+### Run a job in lambda? either aws or azure
